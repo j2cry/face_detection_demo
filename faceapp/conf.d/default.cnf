@@ -1,0 +1,4 @@
+[URLS]
+home = faceapp-api
+port = 21370
+origins = ["https://fragarie.dev", "http://localhost:21371"]

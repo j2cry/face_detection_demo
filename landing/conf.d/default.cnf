@@ -1,0 +1,8 @@
+[URLS]
+home = faceapp
+face_service = http://127.0.0.1:21370/faceapp-api
+port = 21371
+
+[PARAMS]
+delay = 25
+resize = [512, 512]

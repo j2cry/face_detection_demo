@@ -1,0 +1,17 @@
+version: "3"
+services:
+  face-detector-landing:
+    image: faceapp-landing:latest
+    container_name: faceapp-landing
+    expose:
+      - 21371
+    volumes:
+      - /faceapp/conf.d:/faceapp/conf.d:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.faceapp.rule=PathPrefix(`/faceapp`)
+    networks:
+      - faceapp-net
+
+networks:
+  faceapp-net:

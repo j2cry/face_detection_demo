@@ -1,0 +1,10 @@
+FROM python:3.9-slim
+LABEL fragarie 'fragarie@yandex.com'
+
+RUN python3 -m venv /faceapp/venv
+COPY requirements.txt /faceapp/
+RUN /faceapp/venv/bin/pip3 install -r /faceapp/requirements.txt
+COPY . /faceapp/
+WORKDIR /faceapp
+
+ENTRYPOINT ["/faceapp/venv/bin/python3", "landing.py"]

@@ -1,0 +1,22 @@
+version: "3"
+services:
+  face-detector:
+    image: faceapp-api:latest
+    container_name: faceapp-api
+    expose:
+      - 21370
+    volumes:
+      - /faceapp-api/conf.d:/faceapp-api/conf.d:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.faceapp-apis.rule=PathPrefix(`/faceapp-api`)
+      - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto = https
+      - traefik.http.services.faceapp-api-sticky-coockie.loadbalancer.sticky=true
+      - traefik.http.services.faceapp-api-sticky-coockie.loadBalancer.sticky.cookie.name=faceapp-api-sticky-cookie
+      - traefik.http.services.faceapp-api-sticky-coockie.loadBalancer.sticky.cookie.httpOnly=true
+      - traefik.http.services.faceapp-api-sticky-coockie.loadBalancer.sticky.cookie.secure=true
+    networks:
+      - faceapp-net
+
+networks:
+  faceapp-net:
