@@ -5,4 +5,4 @@ port = 21371
 
 [PARAMS]
 delay = 25
-resize = [512, 512]
+resize = [512, 0]

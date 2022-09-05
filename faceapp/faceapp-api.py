@@ -1,3 +1,5 @@
+import base64
+import cv2
 import os
 import json
 import pathlib
@@ -32,10 +34,13 @@ def api_description():
 
 @socket.on('detect_faces')
 def detect_faces(data):
-    # frame = np.frombuffer(data['frame'], dtype=np.int8).reshape(data['width'], data['height'], -1).copy()
-    frame = np.array(list(data['frame'])).reshape(data['height'], data['width'], -1)
+    im_b64 = base64.b64decode(data['frame'])
+    arr = np.frombuffer(im_b64, dtype=np.uint8)
+    frame = cv2.cvtColor(cv2.imdecode(arr, cv2.IMREAD_COLOR), cv2.COLOR_BGR2RGB)
+    # cv2.imwrite('check.png', frame)
     fd = FaceDetector()
     fd.detect(frame, extract=False)
+    # print(frame.shape, fd.boxes)
     return fd.boxes.tolist() if fd.boxes is not None else None
 
 

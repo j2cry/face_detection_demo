@@ -20,9 +20,9 @@
 	<main class="container-fluid">
         <div class="text-light">
             <h5>How to use</h5>
-            Send a POST request containing opencv frame captured from the camera to this URL.<br>
+            Send message named <code>detect_faces</code> via WebSocket (this_url/socket.io) containing base64 image captured from the camera.<br>
             Request body structure:
-            <code>{frame: &lt;your data&gt;}</code><br>
+            <code>{frame: &lt;your image as base64&gt;, width: &lt;W&gt;, height: &lt;H&gt;}</code><br>
             Response body structure:
             <code>[boxes array] or None</code><br>
         </div>
