@@ -2,7 +2,7 @@ import os
 import json
 import pathlib
 import configparser
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 from waitress import serve
 
 
@@ -22,7 +22,9 @@ params = {
     'landing_url': HOME_URL.as_posix(),
     'service_url': FACE_URL,
     'delay': int(config['PARAMS']['delay']),
-    'resize': json.loads(config['PARAMS']['resize'])
+    'resize': json.loads(config['PARAMS']['resize']),
+    'thick': int(config['PARAMS']['thick']),
+    'color': config['PARAMS']['color'],
 }
 
 # define routes

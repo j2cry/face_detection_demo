@@ -59,19 +59,19 @@ window.addEventListener("load", () => {
     }
 
     function captureFrame() {
-        // scale
-        sctx.drawImage(cctx.canvas, 0, 0, sctx.canvas.width, sctx.canvas.height)
+        // draw scaled
+        sctx.drawImage(video, 0, 0, sctx.canvas.width, sctx.canvas.height)
         // send to API
         dataURL = sctx.canvas.toDataURL("image/png")
         image = dataURL.replace(/^data:image\/(png|jpg);base64,/, "")
         imageInfo = {frame: image, width: sctx.canvas.width, height: sctx.canvas.height}        
         socket.emit('detect_faces', imageInfo, (detected) => {
-            // refresh frame
-            cctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight)
             if (detected) {
+                cctx.clearRect(0, 0, cctx.canvas.width, cctx.canvas.height)
                 // draw rects
                 cctx.beginPath()
-                cctx.strokeStyle = "#00FF00"
+                cctx.strokeStyle = params['color']
+                cctx.lineWidth = params['thick']
                 detected.forEach((box) => {
                     l = box[0] / scale.w
                     t = box[1] / scale.h
@@ -87,7 +87,6 @@ window.addEventListener("load", () => {
                 cctx.clearRect(0, 0, cctx.canvas.width, cctx.canvas.height)
         });
     }
-
 
     btn = document.getElementById("debug")
     btn.onclick = function (ev) {

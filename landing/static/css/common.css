@@ -1,0 +1,23 @@
+#stage {
+    position: relative;
+}
+
+#canvas {
+    position: absolute;
+    z-index: 2;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;    
+}
+
+#video {
+    position: absolute;
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;    
+}

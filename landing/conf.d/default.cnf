@@ -4,5 +4,7 @@ face_service = http://127.0.0.1:21370/faceapp-api
 port = 21371
 
 [PARAMS]
-delay = 25
+delay = 100
 resize = [512, 0]
+thick = 2
+color = #501010
